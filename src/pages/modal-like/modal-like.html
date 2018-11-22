@@ -1,0 +1,29 @@
+<div style="width: 80%;height: 25%;margin-top: 40%;margin-left: 10%;margin-right: 10%;">
+  <ion-header style="position: relative;">
+    <ion-toolbar>
+      <ion-title>
+        Description
+      </ion-title>
+      <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+          <span ion-text color="primary" showWhen="ios">Cancel</span>
+          <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label >Sender</ion-label>
+        <ion-select [(ngModel)]="gaming" (ionCancel)="gamingCancel()" (ionChange)="gamingChange($event)">
+          <ion-option [value]="item.id +','+ item.count" *ngFor="let item of newSida">{{item.name}} &nbsp;&nbsp;{{item.count}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-input type="text" value="" placeholder="Content"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full style="height: 5.6rem;font-size: 20px;" (click)="gotoOK()">OK</button>
+  </ion-content>
+</div>
