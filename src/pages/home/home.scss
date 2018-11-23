@@ -1,3 +1,35 @@
 page-home {
 
 }
+.md,
+.ios,
+.wp {
+  .custom-alert-danger {
+    > div {
+       border-radius: 12px;
+      // background-color: #f8f8f8;
+      .alert-title{
+           color: rebeccapurple;
+           font-size: 28px;
+           margin-top: 0px;
+      }
+      .alert-md,
+      .alert-input {
+        margin: 0px;
+        /* border-radius: 15px; */
+        border: 0.55px solid #ccc;
+        border-radius: 25px;
+        text-align: center;
+        padding: 12px;
+      }
+      .alert-ios,
+      .alert-button{
+        background-color: orange;
+        color: white;
+      }
+      //background: white; // if you don't use .md, .ios, .mp initially, you'd have to use !important here.
+      //color: #fff;
+      //margin-bottom: 10px;
+    }
+  }
+}

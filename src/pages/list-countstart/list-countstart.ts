@@ -1,13 +1,17 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {Component,ViewChild} from '@angular/core';
+import {NavController, NavParams, Navbar, LoadingController, AlertController} from 'ionic-angular';
 import {File, IWriteOptions} from '@ionic-native/file';
 import {AngularFireStorage} from 'angularfire2/storage';
 import { IOSFilePicker } from '@ionic-native/file-picker';
+import {NewsApiService} from "../../services/newsapi.service";
+import {HomePage} from "../home/home";
 @Component({
   selector: 'page-list-countstart',
   templateUrl: 'list-countstart.html',
 })
 export class ListCountstartPage {
+  @ViewChild(Navbar) navBar: Navbar;
+
   listcount: any;
 
   constructor(
@@ -15,7 +19,10 @@ export class ListCountstartPage {
     public navParams: NavParams,
     private file: File,
     private storage: AngularFireStorage,
-    private filePicker: IOSFilePicker
+    private filePicker: IOSFilePicker,
+    private newsApiService: NewsApiService,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
   ) {
     this.listcount = this.navParams.get("listcount");
     this.listcount.sort(function (a, b) {
@@ -23,16 +30,49 @@ export class ListCountstartPage {
     });
 
   }
-
-  ionViewDidLoad() {
-
+  setBackButtonAction(){
+    this.navBar.backButtonClick = () => {
+      //Write here wherever you wanna do
+     // this.navCtrl.pop();
+      this.navCtrl.push(HomePage)
+    }
   }
+  ionViewDidLoad(){
+    // @ts-ignore
+    this.setBackButtonAction();
+  }
+  //alert
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Success',
+      subTitle: 'Please check firebase !',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  //is loading
+  presentLoadingDefault(text) {
+    let loading = this.loadingCtrl.create({
+      content: text
+    });
 
+    loading.present();
+
+    setTimeout(() => {
+      if(text ==='Please wait...'){
+        loading.dismiss();
+        this.presentAlert()
+      } else {
+        loading.dismiss();
+      }
+    }, 1000);
+  }
 //dowload file csv
   dowloadFile() {
     this.listcount = [];
     this.filePicker.pickFile()
       .then(uri => {
+        this.presentLoadingDefault('Loading...');
         let correctPath = uri.substr(0, uri.lastIndexOf('/') + 1);
         let convertPath = "file://" + correctPath;
         let currentName = uri.substring(uri.lastIndexOf('/') + 1);
@@ -52,8 +92,12 @@ export class ListCountstartPage {
                 result.pop();
                 result.map(e =>{
                      this.listcount.push(e);
-                })
-                console.log(result);
+                     this.newsApiService.updatePerson(e)
+                       .then(data =>console.log(data))
+                       .catch(err =>console.log(err))
+                });
+
+
           })
           .catch(err =>console.log("err"))
       })
@@ -61,6 +105,7 @@ export class ListCountstartPage {
   }
 
   savefile() {
+    this.presentLoadingDefault('Please wait...');
     let csvData = this.ConvertToCSV(this.listcount);
     const opt: IWriteOptions = {replace: true}
     this.file.writeFile(this.file.documentsDirectory, 'data.csv', csvData, opt)

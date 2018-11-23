@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <ion-title>
        ThanksApp
     </ion-title>
@@ -10,41 +10,43 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <ion-card *ngFor="let item of listPerson">
-    <ion-item>
-      <ion-avatar item-start>
-        <img [src]="item.image" (click)="showDailogLike(item.countstart,item.id)">
-      </ion-avatar>
-      <h2>{{item.name}}</h2>
-      <p>{{item.email}}</p>
-    </ion-item>
+<ion-content>
+  <ion-scroll scrollY="true" style="height: 100%;width: 100%" scrollX="true">
+    <ion-card *ngFor="let item of listPerson">
+      <ion-item>
+        <ion-avatar item-start>
+          <img [src]="item.image" (click)="showDailogLike(item.countstart,item.id)">
+        </ion-avatar>
+        <h2>{{item.name}}</h2>
+        <p>{{item.email}}</p>
+      </ion-item>
 
-    <img [src]="item.urlImage">
+      <img [src]="item.urlImage">
 
-    <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-    </ion-card-content>
+      <ion-card-content>
+        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      </ion-card-content>
 
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-start clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>{{item.countstart}}</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-start clear small>
-          <ion-icon name="text"></ion-icon>
-          <div>4 Comments</div>
-        </button>
-      </ion-col>
-      <ion-col center text-center>
-        <ion-note>
-          11h ago
-        </ion-note>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>{{item.countstart}}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>4 Comments</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-note>
+            11h ago
+          </ion-note>
+        </ion-col>
+      </ion-row>
 
-  </ion-card>
+    </ion-card>
+  </ion-scroll>
 </ion-content>

@@ -79,8 +79,8 @@ export class ModalLikePage {
       .then(data =>{
         this.newSida = data;
         //console.log(data)
-        this.viewCtrl.dismiss();
       })
       .catch(err =>console.log(err))
+    this.viewCtrl.dismiss();
   }
 }

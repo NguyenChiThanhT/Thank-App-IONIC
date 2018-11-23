@@ -25674,6 +25674,44 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+.md .custom-alert-danger > div,
+.ios .custom-alert-danger > div,
+.wp .custom-alert-danger > div {
+  border-radius: 12px;
+}
+
+.md .custom-alert-danger > div .alert-title,
+.ios .custom-alert-danger > div .alert-title,
+.wp .custom-alert-danger > div .alert-title {
+  color: rebeccapurple;
+  font-size: 28px;
+  margin-top: 0px;
+}
+
+.md .custom-alert-danger > div .alert-md,
+.md .custom-alert-danger > div .alert-input,
+.ios .custom-alert-danger > div .alert-md,
+.ios .custom-alert-danger > div .alert-input,
+.wp .custom-alert-danger > div .alert-md,
+.wp .custom-alert-danger > div .alert-input {
+  margin: 0px;
+  /* border-radius: 15px; */
+  border: 0.55px solid #ccc;
+  border-radius: 25px;
+  text-align: center;
+  padding: 12px;
+}
+
+.md .custom-alert-danger > div .alert-ios,
+.md .custom-alert-danger > div .alert-button,
+.ios .custom-alert-danger > div .alert-ios,
+.ios .custom-alert-danger > div .alert-button,
+.wp .custom-alert-danger > div .alert-ios,
+.wp .custom-alert-danger > div .alert-button {
+  background-color: orange;
+  color: white;
+}
+
 page-modal-like .scroll-content {
   margin-top: 0px !important;
 }

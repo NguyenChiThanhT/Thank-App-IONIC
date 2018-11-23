@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, ModalController, NavController} from 'ionic-angular';
+import {AlertController, ModalController, NavController, NavParams} from 'ionic-angular';
 import {NewsApiService} from "../../services/newsapi.service";
 import {ModalLikePage} from "../modal-like/modal-like";
 import {ListCountstartPage} from "../list-countstart/list-countstart";
@@ -18,11 +18,14 @@ export class HomePage {
     public navCtrl: NavController,
     private newsApiService: NewsApiService,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public navParams: NavParams,
   ) {
   }
 
   ionViewDidLoad() {
+    // console.log(this.navParams.get("thanh"));
+    console.log("ionViewDidLoad","mot")
     this.newCountStart = 0;
     this.newsApiService.getPerson()
       .then(data => {
@@ -50,14 +53,15 @@ export class HomePage {
           });
         modal.present();
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
   //show modal
   showPrompt() {
     const prompt = this.alertCtrl.create({
       title: 'Login',
-      message: "Enter a name for this new album you're so keen on adding",
+      //message: "Please enter password !",
+      cssClass:'custom-alert-danger',
       inputs: [
         {
           name: 'title',

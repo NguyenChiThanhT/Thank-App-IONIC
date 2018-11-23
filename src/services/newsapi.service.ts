@@ -65,7 +65,7 @@ export class NewsApiService {
       headers.append('Content-Type', 'application/json' );
       // @ts-ignore
       const requestOptions = new RequestOptions({ headers: headers });
-      const url = "http://nguyenchithanhfpt.atwebpages.com/api/updatecount.php";
+      const url = "http://nguyenchithanhfpt.atwebpages.com/api/updatelistperson.php";
       return this.http.put(url,parmas,requestOptions)
         .toPromise()
         .then(res =>res.json())
